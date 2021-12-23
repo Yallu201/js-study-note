@@ -2,9 +2,9 @@
 
 ## 목차
 1. [기본문법](#1-기본문법)
-2. [ES6+ 문법](#2-ES6+-문법)
+2. [ES6+ 문법](#2-es6-문법)
 3. [비동기처리](#3-비동기처리)
-4. [HTTP통신](#4-HTTP통신)
+4. [HTTP통신](#4-http-통신)
 
 ## 1. 기본문법
 ### [hoisting](https://developer.mozilla.org/ko/docs/Glossary/Hoisting) (MDN 링크)
@@ -260,7 +260,7 @@ console.log(newArray); // [1,2,3,4,5]
 ```
  - [class](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes) (MDN 링크)
 
-## 비동기처리
+## 3. 비동기처리
 ### callback
 - 특정 시점에 실행이 필요한 로직(함수)을 함수의 인자로 넘겨주는 방식입니다.
 - setTimeout, setInterval, http response 처리 등...
@@ -339,7 +339,7 @@ sampleAsyncFunction();
 
 ### 
 
-## 3. HTTP 통신
+## 4. HTTP 통신
 ### http method
 ###  
 [promise]: <>
