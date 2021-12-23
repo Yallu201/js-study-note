@@ -1,5 +1,12 @@
 # JavaScript
 
+## 목차
+1. [기본문법](#1.-기본문법)
+2. [ES6+ 문법](#2.-ES6+-문법)
+3. [비동기처리](#3.-비동기처리)
+4. [HTTP통신](#4.-HTTP통신)
+
+## 1. 기본문법
 ### [hoisting](https://developer.mozilla.org/ko/docs/Glossary/Hoisting) (MDN 링크)
 ```javascript
 console.log(add(1)); // 2
@@ -117,7 +124,7 @@ const closer = highScope();
 
 closer(); // 10
 ```
-## ES6+ 문법
+## 2. ES6+ 문법
  - const, let
 ```javascript
 // 프로젝트 내에서는 let과 const를 주로 사용합니다.
@@ -332,7 +339,7 @@ sampleAsyncFunction();
 
 ### 
 
-## HTTP 통신
+## 3. HTTP 통신
 ### http method
 ###  
 [promise]: <>
