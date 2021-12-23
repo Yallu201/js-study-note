@@ -97,7 +97,6 @@ console.log(b()); // 1
 // [주의] this 결정시점과 혼동될 수 있습니다. 함수의 this는 함수가 실행될 때 결정됩니다.
 
 // PS. execution context의 자세한 내용은 처음에 이해하기 어려울 수 있습니다. js에 익숙해진 이후에 학습을 추천합니다.
-
 ```
 ### [closer](https://developer.mozilla.org/ko/docs/Web/JavaScript/Closures) (MDN 링크)
 - 상위 scope의 식별자를 참조하는 하위 scope 입니다.
@@ -194,7 +193,7 @@ export default mainFunction;
  - [pormise](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise) (MDN 링크)
 ```javascript
 const p = new Promise((resolve,reject)=>{
-	console.log("promise start");
+	console.log("promise object created!");
   setTimeout(()=>{
   	resolve('something');
   },1000);
@@ -256,9 +255,81 @@ console.log(newArray); // [1,2,3,4,5]
 
 ## 비동기처리
 ### callback
-### Promise
-### Async Await
-### Event Loop
+- 특정 시점에 실행이 필요한 로직(함수)을 함수의 인자로 넘겨주는 방식입니다.
+- setTimeout, setInterval, http response 처리 등...
+- 무분별한 사용 시 [콜백지옥](https://librewiki.net/wiki/%EC%BD%9C%EB%B0%B1_%EC%A7%80%EC%98%A5)을 맛볼 수 있습니다.
+```javascript
+const callback = () => console.log("run callback function!");
+setTimeout(callback,1000);
+```
+### [promise](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise) ( MDN 링크 )
+- es6 에서 처음 등장한 문법입니다.
+- 비동기 작업이 완료된 이후의 처리를 작성할 수 있습니다.
+- ~~콜백지옥에서 벗어나게해준 은인~~
+```javascript
+const callback = (resolve,reject) => {
+    console.log('프로미스 객체 생성 시 해당 내용이 실행됩니다.');
+    setTimeout(() => {
+        resolve('비동기요청 성공');
+    },1000);
+};
+const promise = new Promise(callback);
+
+promise.then((value) => {
+    // promise 객체 생성 시 전달된 callback내 resolve() 실행시점에서 해당 내용이 실행됩니다.
+    console.log(value); // 비동기요청 성공
+}).catch((msg)=>{
+    // reject()가 실행되는 시점에서 해당 내용이 실행됩니다.
+    // 현재 reject()를 작성하지 않았기때문에 실행하지 않습니다.
+}).finally(()=>{
+    // 어떠한 경우에서라도 실행이 필요한 로직이 있다면 이곳에 작성합니다.( log 등 ... )
+});
+```
+### [async await](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/async_function) ( MDN 링크 )
+- Promise 객체를 사용하는 다른 방법입니다.
+- 비동기 처리를 동기적인 문법으로 작성할 수 있습니다.
+- `async` 예약어를 함수앞에 붙여 사용합니다. (이하 `async 함수`)
+```javascript
+async function add(){
+    // ... something
+}
+```
+- `await` 예약어는 `async 함수`에서만 사용 가능합니다.
+```javascript
+function helloAfter2seconds(){
+    return new Promise((resolve)=>{ // new 예약어를 잊지맙시다.
+        setTimeout(()=>{
+            resolve("안녕하세요!");
+        },2000);
+    });
+}
+async function sampleAsyncFunction(){
+    console.log("start async function");
+    
+    const result = await helloAfter2seconds(); 
+    console.log(result); // 안녕하세요!
+    
+    console.log("end async function");
+}
+sampleAsyncFunction();
+
+/**
+    [async 함수 실행 중 await 도달 시 처리 순서]
+    
+    1. sampleAsyncFunction() 실행을 중단합니다.
+    2. helloAfter2seconds 함수가 반환하는 Promise의 callback을 실행합니다.
+    3. resolve() 혹은 reject() 실행 순간을 기다립니다.
+    4. resolve 혹은 reject로 전달된 인자를 리턴합니다.
+*/
+```
+### event loop
+- [유튜브 설명영상](https://www.youtube.com/watch?v=8aGhZQkoFbQ) (한글자막 있어요)
+- JS runtime은 single thread 입니다.
+- 비동기 작업이 필요한경우, Web API에 위임하여 작업 완료 후 task queue에 callback을 전달합니다.
+- call stack이 비어있는경우, event loop가 작동하며 task queue를 확인합니다.
+- FIFO방식으로 task queue에 전달된 callback을 call stack에 올려 실행합니다.  
+- event loop가 충분히 이해가 되셨다면, 실행컨텍스트(execution context) 학습을 추천합니다:)
+
 ### 
 
 ## HTTP 통신
