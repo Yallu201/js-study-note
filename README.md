@@ -3,10 +3,13 @@
 ### [hoisting](https://developer.mozilla.org/ko/docs/Glossary/Hoisting) (MDN 링크)
 ```javascript
 console.log(add(1)); // 2
+
 console.log(num1); // undefined
 var num1 = 1;
+
 console.log(num2); // reference error
 let num2 = 2;
+
 console.log(num3); // reference error
 const num3 = 3;
 
@@ -30,23 +33,27 @@ function Student(name){
         console.log("Hello my name is " + this.name);
     }
 }
+
 // 인스턴스 생성
 const minsu = new Student('민수');
 minsu.say(); // Hello my name is 민수
-
 
 // this는 함수가 실행되는 시점에 결정됩니다.
 const john = {
     name: '존'
 }
+
 john.say = minsu.say;
+
 john.say(); // Hello my name is 존
 
 // 전역 및 일반함수에서 this는 window 전역 객체입니다.
 console.log(this); // window object
+
 function nomalFunction(){
     console.log(this); // window object
 }
+
 nomalFunction(); 
 
 // PS. 추가적으로 bind, call, apply 함수를 통해 this를 지정해줄 수 있습니다.
@@ -54,30 +61,36 @@ nomalFunction();
 ### [scope](https://developer.mozilla.org/ko/docs/Glossary/Scope) (MDN 링크)
 ```javascript
 var item = '손전등';
+
 function room(){
     var state = '정전';
     find();
+    
     function find(){
         console.log(item + '어디있지?')
     }
 }
+
 room(); // 손전등 어디있지?
 // scope chain을 통해 상위 scope의 식별자에서 참조할 값을 찾습니다.
 ```
 ### execution context
 ```javascript
 var num = 1;
+
 function a(){
     return num;
 }
+
 function b(){
     var num = 3;
     return a();
 }
+
 console.log(b()); // 1
+
 /** 
- 함수의 상위 scope는 
- 함수가 정의될 때 결정됩니다.
+ 함수의 상위 scope는 함수가 정의될 때 결정됩니다.
  함수 a의 상위스코프는 전역스코프 입니다.
 */
 
@@ -94,12 +107,15 @@ console.log(b()); // 1
 ```javascript
 function highScope(){ // 상위 scope
     var num = 10;
+    return lowScope;
+    
     function lowScope(){ // 하위 scope
         console.log(num);
     }
-    return lowScope;
 }
+
 const closer = highScope();
+
 closer(); // 10
 ```
 ## ES6+ 문법
@@ -120,16 +136,8 @@ function add1(input){
      return input + 1;
  };
  const add2 = (input) => { return input + 1 };
- 
-function sub1(input){
-     return input - 1;
- };
- const sub2 = (input) => input - 1;
- 
-function pow1(input){
-     return input * input;
- };
- const pow2 = input => input * input;
+ const add3 = (input) => input + 1;
+ const add4 = input => input + 1;
  ```
  - template literals
 ```javascript
@@ -211,18 +219,20 @@ p.then((value)=>{
   // throw "throw error"
   // return new Promise((resolve,reject)=>{reject("throw error")});
 }).catch((message)=>{
+	// 위 주석 해제 시 해당 catch 영역이 실행됩니다.
 	console.error(message);
 }).finally(()=>{
 	console.log("promise finish");
 });
 ```
- - rest parameter and spread operator
+ - rest parameter and spread operator( 비구조화 할당 )
 ```javascript
 const Sam = {
     name:'샘',
     age:26,
     hobby: 'piano'
 }
+
 // rest parameter
 const {name, ...rest} = Sam;
 console.log(rest); // {age:26, hobby:'piano'}
@@ -237,7 +247,9 @@ console.log(...others); // 3,4,5
 function convertArgumentsToArray(...spreadedArgument){
     return spreadedArgument;
 }
+
 const newArray = convertArgumentsToArray(1,2,3,4,5);
+
 console.log(newArray); // [1,2,3,4,5]
 ```
  - [class](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes) (MDN 링크)
