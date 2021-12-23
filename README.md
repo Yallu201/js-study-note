@@ -1,10 +1,10 @@
 # JavaScript
 
 ## 목차
-1. [기본문법](#1.-기본문법)
-2. [ES6+ 문법](#2.-ES6+-문법)
-3. [비동기처리](#3.-비동기처리)
-4. [HTTP통신](#4.-HTTP통신)
+1. [기본문법](#1-기본문법)
+2. [ES6+ 문법](#2-ES6+-문법)
+3. [비동기처리](#3-비동기처리)
+4. [HTTP통신](#4-HTTP통신)
 
 ## 1. 기본문법
 ### [hoisting](https://developer.mozilla.org/ko/docs/Glossary/Hoisting) (MDN 링크)
